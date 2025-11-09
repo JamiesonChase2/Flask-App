@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Songs App{% endblock %}
+{% block content %}
+<section class="form-card" style="max-width: 720px;">
+  <div class="header-row">
+    <h2>Song List</h2>
+    <a class="btn primary" href="{{ url_for('insert') }}">+ Add Song</a>
+  </div>
+  <p class="muted">All entries (newest first)</p>
+
+    <ul class="song-list">
+      {% for s in songs %}
+      <li class="song-item">
+        <strong>{{ s.title }}</strong>
+        {% if s.artist %}<span>by {{ s.artist }}</span>{% endif %}
+        {% if s.genre %}<span> • {{ s.genre }}</span>{% endif %}
+        {% if s.rating is not none %}<span> • ★ {{ '%.1f'|format(s.rating) }}</span>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+</section>
+{% endblock %}
